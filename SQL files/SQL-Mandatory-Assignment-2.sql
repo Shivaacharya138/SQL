@@ -11,7 +11,7 @@ USE ASSIGNMENTS_25
 
 SELECT * FROM Jomato
 
---1. Create a user-defined functions to stuff the Chicken into ‘Quick Bites’. Eg: ‘Quick Chicken Bites’.
+--1. Create a user-defined functions to stuff the Chicken into â€˜Quick Bitesâ€™. Eg: â€˜Quick Chicken Bitesâ€™.
 
 CREATE OR ALTER FUNCTION Stuffing(@stuffingitem VARCHAR(50))
 RETURNS TABLE
@@ -54,9 +54,9 @@ SELECT RestaurantName, CuisinesType, No_of_Rating FROM Jomato WHERE No_of_rating
 
 ROLLBACK
 
---3. Create a Rating Status column to display the rating as ‘Excellent’ if it has more the 4
---start rating, ‘Good’ if it has above 3.5 and below 4 star rating, ‘Average’ if it is above 3
---and below 3.5 and ‘Bad’ if it is below 3 star rating and
+--3. Create a Rating Status column to display the rating as â€˜Excellentâ€™ if it has more the 4
+--start rating, â€˜Goodâ€™ if it has above 3.5 and below 4 star rating, â€˜Averageâ€™ if it is above 3
+--and below 3.5 and â€˜Badâ€™ if it is below 3 star rating and
 
 SELECT *,
 CASE 
@@ -90,6 +90,6 @@ YEAR(GETDATE()) YEAR, DATENAME(MM, GETDATE()) MONTH, DAY(GETDATE()) DAY FROM JOM
 
 --5. Display the restaurant type and total average cost using rollup.
 
-SELECT RestaurantType, AverageCost FROM JOMATO ROLLUP
+SELECT RestaurantType, SUM(AverageCost) Total_Avg_Cost FROM JOMATO GROUP BY ROLLUP(RestaurantType)
 
 
